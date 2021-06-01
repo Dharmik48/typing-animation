@@ -1,0 +1,80 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 1px solid red; */
+}
+
+:root {
+  --background-color: #e3e7d3;
+  --type-time: 4s;
+  --characters: 20;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--background-color);
+  font-family: 'Source Code Pro', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 1em;
+  position: relative;
+}
+
+p {
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateY(-2em);
+  animation: fadeAppear 400ms calc(var(--type-time) + 1s) ease-out forwards;
+}
+
+h1::after,
+h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+h1::before {
+  background-color: var(--background-color);
+  animation: type var(--type-time) 1s steps(var(--characters)) forwards;
+}
+
+h1::after {
+  width: 0.1em;
+  background: black;
+  animation: type var(--type-time) 1s steps(var(--characters)) forwards,
+    blink 750ms ease-in-out infinite;
+}
+
+@keyframes type {
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
